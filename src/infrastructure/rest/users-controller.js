@@ -1,5 +1,5 @@
 const express = require('express');
-const SaveTestCommand = require('../../application/save_test/save-test-command');
+const SaveUserCommand = require('../../application/save_user/save-user-command');
 const container = require('../../container');
 // eslint-disable-next-line new-cap
 const router = express.Router();
@@ -7,9 +7,9 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const {text} = req.body;
   try {
-    const command = new SaveTestCommand({text});
-    const saveTest = container.resolve('saveTest');
-    const response = await saveTest.save(command);
+    const command = new SaveUserCommand({text});
+    const saveUser = container.resolve('saveUser');
+    const response = await saveUser.save(command);
 
     res.status(200).json({...response});
   } catch (error) {

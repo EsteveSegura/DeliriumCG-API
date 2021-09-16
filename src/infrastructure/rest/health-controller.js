@@ -6,7 +6,7 @@ const {server: {port}} = require('../config/');
 
 router.get('/', async (req, res) => {
   try {
-    res.status(200).send(`${port} OK -----`);
+    res.status(200).send(`${port} OK`);
   } catch (error) {
     res.status(500).send('FAIL');
   }
