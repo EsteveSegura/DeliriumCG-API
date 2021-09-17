@@ -1,9 +1,10 @@
 const awilix = require('awilix');
 
-const crypto = require('crypto');
 const {v4: uuidv4} = require('uuid');
+const crypto = require('crypto');
+const jsonwebtoken = require('jsonwebtoken');
+const JwtGenerator = require('./infrastructure/services/jwt-generator');
 const idGenerator = require('./domain/services/id-generator');
-const tokenGenerator = require('./domain/services/token-generator');
 const MUUID = require('uuid-mongodb');
 const MongoUserRepository = require('./infrastructure/persistence/mongo/mongo-user-repository')
 const MongoPluginRepository = require('./infrastructure/persistence/mongo/mongo-plugin-repository')
@@ -21,8 +22,9 @@ const container = awilix.createContainer({
 container.register({
   uuidv4: awilix.asValue(uuidv4),
   crypto: awilix.asValue(crypto),
+  jwt: awilix.asValue(jsonwebtoken),
+  TokenGenerator: awilix.asClass(JwtGenerator),
   idGenerator: awilix.asFunction(idGenerator),
-  tokenGenerator: awilix.asFunction(tokenGenerator),
   muuid: awilix.asValue(MUUID),
   userRepository: awilix.asClass(MongoUserRepository),
   pluginRepository: awilix.asClass(MongoPluginRepository),

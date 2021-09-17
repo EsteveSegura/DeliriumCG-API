@@ -1,7 +1,7 @@
-const tokenGenerator = ({crypto}) => {
-  return {
-    generate: () => crypto.randomBytes(32).toString('hex'),
-  };
-};
+class TokenGenerator {
+  generate(id, cryptoKey) {
+    throw new Error('Method not implemented yet');
+  }
+}
 
-module.exports = tokenGenerator;
+module.exports = TokenGenerator;

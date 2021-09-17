@@ -1,8 +1,9 @@
 const InvalidUserError = require('./error/invalid-user-error');
 
 class User {
-  constructor({ id, createdAt, updatedAt }) {
+  constructor({ id, token, createdAt, updatedAt }) {
     this.id = id;
+    this.token = token;
     this.updatedAt = updatedAt;
     this.createdAt = createdAt;
   }
@@ -17,6 +18,18 @@ class User {
 
   get id() {
     return this._id;
+  }
+
+  set token(token) {
+    if (!token) {
+      throw new InvalidUserError('Field token cannot be empty');
+    }
+
+    this._token = token;
+  }
+
+  get token() {
+    return this._token;
   }
 
   set createdAt(createdAt) {

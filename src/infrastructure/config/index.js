@@ -7,6 +7,9 @@ const run = {
     port: process.env.PORT || 3000,
     host: `https://localhost:/${process.env.PORT}`,
   },
+  tokenSigner:{
+    cryptoKey: process.env.TOKEN_SIGNATURE || 'HQdbSM6Wfcd6rseArxTmQeR8RxBNj6dyUm3RNFQQQWdcmpxtqpWZcB4xErCBjQXMcWe66vHFj4Gxq'
+  },
   mongo: {
     mongoConnectionUri: `mongodb://localhost:27017/deliriumCG`,
     dbName: process.env.MONGO_DB_NAME || 'deliriumCG',
@@ -19,6 +22,9 @@ const test = {
   server: {
     port: process.env.PORT || 3000,
     host: `https://localhost:/${process.env.PORT}`,
+  },
+  tokenSigner:{
+    cryptoKey: process.env.TOKEN_SIGNATURE || '&/.)-"rp`)!}n~T{T4sK((e<t4M/d&YYvYQ<TY87U{n]>XYxQV~*T6BE~U`6JL2$&u^<D9WSG=g'
   },
 };
 
