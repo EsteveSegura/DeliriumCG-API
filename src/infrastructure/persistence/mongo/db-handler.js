@@ -21,7 +21,13 @@ const MongoDbHandler = (() => {
   const createInstance = async () => {
     const db = await _connect();
 
-    db.collection(dbName).createIndexes([
+    db.collection('users').createIndexes([
+      {name: '_id', key: {_id: 1}},
+    ], function(err, result) {
+      console.log(result);
+    });
+
+    db.collection('plugins').createIndexes([
       {name: '_id', key: {_id: 1}},
     ], function(err, result) {
       console.log(result);

@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'twitch-shared-community-graph-api',
+      name: 'DeliriumCG-API',
       script: './src/index.js',
       instances: 3,
       exec_mode: 'cluster',
