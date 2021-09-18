@@ -1,8 +1,7 @@
 const GetPluginResponse = require('./get-plugin-response');
 
 class GetPlugin {
-  constructor({ idGenerator, pluginRepository, userRepository, triggerBuilder }) {
-    this.idGenerator = idGenerator;
+  constructor({ pluginRepository, userRepository, triggerBuilder }) {
     this.pluginRepository = pluginRepository;
     this.userRepository = userRepository;
     this.triggerBuilder = triggerBuilder;

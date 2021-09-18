@@ -11,6 +11,7 @@ const MongoPluginRepository = require('./infrastructure/persistence/mongo/mongo-
 const saveUser = require('./application/save_user/index');
 const savePlugin = require('./application/save_plugin/index');
 const getPlugin = require('./application/get_plugin/index');
+const displayPlugin = require('./application/display_plugin/index');
 const mongoDbHandler = require('./infrastructure/persistence/mongo/db-handler');
 const userDocumentParser = require('./infrastructure/persistence/mongo/user-document-parser');
 const pluginDocumentParser = require('./infrastructure/persistence/mongo/plugin-domain-parser');
@@ -32,6 +33,7 @@ container.register({
   saveUser: awilix.asClass(saveUser),
   savePlugin: awilix.asClass(savePlugin),
   getPlugin: awilix.asClass(getPlugin),
+  displayPlugin: awilix.asClass(displayPlugin),
   mongoDbHandler: awilix.asFunction(mongoDbHandler).singleton(),
   userDocumentParser: awilix.asFunction(userDocumentParser),
   pluginDocumentParser: awilix.asFunction(pluginDocumentParser),
