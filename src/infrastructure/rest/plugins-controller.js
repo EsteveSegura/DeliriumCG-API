@@ -7,11 +7,11 @@ const verifyToken = require('./middleware/verify-token');
 const router = express.Router();
 
 router.post('/', verifyToken, async (req, res) => {
-  const {name, source, isPrivate} = req.body;
+  const {name, source, isPrivate, triggers} = req.body;
   const {id: authenticatedId} = req.authenticatedUserId;
 
   try {
-    const command = new SavePluginCommand({name, source, ownerId: authenticatedId, isPrivate});
+    const command = new SavePluginCommand({name, source, ownerId: authenticatedId, isPrivate, triggers});
     const savePlugin = container.resolve('savePlugin');
     const response = await savePlugin.save(command);
 

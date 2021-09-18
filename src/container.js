@@ -1,6 +1,6 @@
 const awilix = require('awilix');
 
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
 const jsonwebtoken = require('jsonwebtoken');
 const JwtGenerator = require('./infrastructure/services/jwt-generator');
@@ -13,7 +13,8 @@ const savePlugin = require('./application/save_plugin/index');
 const getPlugin = require('./application/get_plugin/index');
 const mongoDbHandler = require('./infrastructure/persistence/mongo/db-handler');
 const userDocumentParser = require('./infrastructure/persistence/mongo/user-document-parser');
-const pluginDocumentParser = require('./infrastructure/persistence/mongo/plugin-document-parser');
+const pluginDocumentParser = require('./infrastructure/persistence/mongo/plugin-domain-parser');
+const triggerDomainBuilder = require('./infrastructure/persistence/mongo/trigger-domain-builder');
 
 const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.PROXY,
@@ -34,6 +35,7 @@ container.register({
   mongoDbHandler: awilix.asFunction(mongoDbHandler).singleton(),
   userDocumentParser: awilix.asFunction(userDocumentParser),
   pluginDocumentParser: awilix.asFunction(pluginDocumentParser),
+  triggerBuilder: awilix.asFunction(triggerDomainBuilder)
 });
 
 module.exports = container;

@@ -1,7 +1,7 @@
 const InvalidPluginError = require('./error/invalid-plugin-error');
 
 class Plugin {
-    constructor({ id, name, source, ownerId, isPrivate, createdAt, updatedAt }) {
+    constructor({ id, name, source, ownerId, isPrivate,  triggers, createdAt, updatedAt }) {
         this.id = id;
         this.name = name
         this.source = source;
@@ -9,6 +9,7 @@ class Plugin {
         this.isPrivate = isPrivate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.triggers = triggers;
     }
 
     toObject() {
@@ -18,14 +19,39 @@ class Plugin {
             source: this.source,
             ownerId: this.ownerId,
             isPrivate: this.isPrivate,
+            triggers: this.triggers,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
         }
     }
 
+    addTrigger(trigger) {
+        if (!trigger) {
+            throw new InvalidPluginError('No trigger specified');
+        }
+
+        this.triggers.push(trigger)
+    }
+
     checkOwner(id) {
+        if (!id) {
+            throw new InvalidPluginError('No id specified');
+        }
+
         return id == this.ownerId
     }
+
+     set triggers(triggers) {
+        if (!triggers) {
+          throw new InvalidPluginError('Field triggers cannot be empty');
+        }
+    
+        this._triggers = triggers;
+      }
+    
+      get triggers() {
+        return this._triggers;
+      }
 
     set ownerId(ownerId) {
         if (!ownerId) {

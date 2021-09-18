@@ -24,13 +24,11 @@ const MongoDbHandler = (() => {
     db.collection('users').createIndexes([
       {name: '_id', key: {_id: 1}},
     ], function(err, result) {
-      console.log(result);
     });
 
     db.collection('plugins').createIndexes([
       {name: '_id', key: {_id: 1}},
     ], function(err, result) {
-      console.log(result);
     });
 
     return db;
