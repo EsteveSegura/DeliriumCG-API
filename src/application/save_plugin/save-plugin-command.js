@@ -1,8 +1,9 @@
 class SavePluginCommand {
-  constructor({ name, source }) {
-    console.log(name, source)
+  constructor({ name, source, ownerId, isPrivate }) {
     this.name = name;
     this.source = source;
+    this.ownerId = ownerId;
+    this.isPrivate = isPrivate;
   }
 }
 

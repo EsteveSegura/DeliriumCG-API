@@ -1,10 +1,12 @@
 const InvalidPluginError = require('./error/invalid-plugin-error');
 
 class Plugin {
-    constructor({ id, name, source, createdAt, updatedAt }) {
+    constructor({ id, name, source, ownerId, isPrivate, createdAt, updatedAt }) {
         this.id = id;
         this.name = name
         this.source = source;
+        this.ownerId = ownerId;
+        this.isPrivate = isPrivate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -14,9 +16,35 @@ class Plugin {
             id: this.id,
             name: this.name,
             source: this.source,
+            ownerId: this.ownerId,
+            isPrivate: this.isPrivate,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
         }
+    }
+
+    checkOwner(id) {
+        return id == this.ownerId
+    }
+
+    set ownerId(ownerId) {
+        if (!ownerId) {
+            throw new InvalidPluginError('Field ownerId cannot be empty');
+        }
+
+        this._ownerId = ownerId;
+    }
+
+    get ownerId() {
+        return this._ownerId;
+    }
+
+    set isPrivate(isPrivate = false) {
+        this._isPrivate = isPrivate;
+    }
+
+    get isPrivate() {
+        return this._isPrivate;
     }
 
     set id(id) {

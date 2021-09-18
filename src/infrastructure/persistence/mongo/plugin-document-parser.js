@@ -6,12 +6,16 @@ const mongoDocumentParser = ({ muuid }) => {
       _id,
       createdAt,
       name,
+      ownerId,
+      isPrivate,
       source,
       updatedAt }) => {
       const id = (muuid.from(_id)).toString();
       return new Plugin({
         id,
         name,
+        ownerId,
+        isPrivate,
         source,
         createdAt,
         updatedAt
@@ -21,6 +25,8 @@ const mongoDocumentParser = ({ muuid }) => {
       id,
       createdAt,
       name,
+      ownerId,
+      isPrivate,
       source,
       updatedAt }) => {
       const _id = muuid.from(id);
@@ -28,6 +34,8 @@ const mongoDocumentParser = ({ muuid }) => {
         _id,
         createdAt,
         name,
+        ownerId,
+        isPrivate,
         source,
         updatedAt
       };
