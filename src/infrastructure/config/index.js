@@ -5,6 +5,12 @@ const run = {
     port: process.env.PORT || 3000,
     host: `https://localhost:/${process.env.PORT}`,
   },
+  redis: {
+    redisAttempts: process.env.REDIS_ATTEMPTS || 10,
+    redisTimeOut: process.env.REDIS_TIMEOUT || 60,
+    redisConnectionUri: process.env.REDIS_CONNECTION || 'redis://redis',
+    authCodeExpiration: process.env.AUTH_CODE_EXPIRATION || 7200,
+  },
   tokenSigner:{
     cryptoKey: process.env.TOKEN_SIGNATURE || 'HQdbSM6Wfcd6rseArxTmQeR8RxBNj6dyUm3RNFQQQWdcmpxtqpWZcB4xErCBjQXMcWe66vHFj4Gxq'
   },
@@ -20,6 +26,12 @@ const test = {
   server: {
     port: process.env.PORT || 3000,
     host: `https://localhost:/${process.env.PORT}`,
+  },
+  redis: {
+    redisAttempts: process.env.REDIS_ATTEMPTS || 10,
+    redisTimeOut: process.env.REDIS_TIMEOUT || 60,
+    redisConnectionUri: process.env.REDIS_CONNECTION || 'redis://redis',
+    authCodeExpiration: process.env.AUTH_CODE_EXPIRATION || 7200,
   },
   tokenSigner:{
     cryptoKey: process.env.TOKEN_SIGNATURE || 'HQdbSM6Wfcd6rseArxTmQeR8RxBNj6dyUm3RNFQQQWdcmpxtqpWZcB4xErCBjQXMcWe66vHFj4Gxq'
