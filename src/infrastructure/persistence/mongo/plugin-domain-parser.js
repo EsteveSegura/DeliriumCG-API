@@ -17,7 +17,7 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
         name,
         ownerId,
         isPrivate,
-        source,
+        source: source.join('\n'),
         triggers: triggerBuilder.build(triggers),
         createdAt,
         updatedAt
@@ -39,7 +39,7 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
         name,
         ownerId,
         isPrivate,
-        source,
+        source: source.split('\n'),
         triggers: triggerBuilder.make(triggers),
         updatedAt
       };

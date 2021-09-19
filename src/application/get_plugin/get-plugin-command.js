@@ -1,7 +1,8 @@
 class GetPluginCommand {
-  constructor({ id, candidateOwner }) {
+  constructor({ id, candidateOwner, name }) {
     this.id = id;
-    this.candidateOwner = candidateOwner
+    this.candidateOwner = candidateOwner;
+    this.name = name;
   }
 }
 

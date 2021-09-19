@@ -2,10 +2,6 @@ const redis = require('redis');
 const {redis: {redisConnectionUri, redisAttempts, redisTimeOut}} = require('../config');
 
 class RedisHandler {
-  constructor({logger}) {
-    this._logger = logger;
-  }
-
   async getClient() {
     if (!this._client || !this._client.connected) {
       this._client = redis.createClient(redisConnectionUri, {retry_strategy: function(options) {
@@ -20,10 +16,20 @@ class RedisHandler {
       }});
 
       this._client.on('error', ({message}) => {
-        this._logger.error(message);
+        console.log(message)
       });
     }
     return this._client;
+  }
+
+  onMessage(cb) {
+    try {
+      this._client.on('message', function(channel, message) {
+        cb(channel, message);
+      });
+    } catch (err) {
+      throw err;
+    }
   }
 
   async disconnect() {

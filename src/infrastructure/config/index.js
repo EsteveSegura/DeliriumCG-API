@@ -8,7 +8,7 @@ const run = {
   redis: {
     redisAttempts: process.env.REDIS_ATTEMPTS || 10,
     redisTimeOut: process.env.REDIS_TIMEOUT || 60,
-    redisConnectionUri: process.env.REDIS_CONNECTION || 'redis://redis',
+    redisConnectionUri: process.env.REDIS_CONNECTION || 'redis://127.0.0.1/',
     authCodeExpiration: process.env.AUTH_CODE_EXPIRATION || 7200,
   },
   tokenSigner:{
@@ -30,7 +30,7 @@ const test = {
   redis: {
     redisAttempts: process.env.REDIS_ATTEMPTS || 10,
     redisTimeOut: process.env.REDIS_TIMEOUT || 60,
-    redisConnectionUri: process.env.REDIS_CONNECTION || 'redis://redis',
+    redisConnectionUri: process.env.REDIS_CONNECTION || 'localhost:6379',
     authCodeExpiration: process.env.AUTH_CODE_EXPIRATION || 7200,
   },
   tokenSigner:{

@@ -1,8 +1,6 @@
 const SavePluginResponse = require('./save-plugin-response');
 const Plugin = require('../../domain/plugin/plugin');
 
-const Pulse = require('../../domain/plugin/triggers/pulse');
-
 class SavePlugin {
   constructor({ idGenerator, pluginRepository, userRepository, triggerBuilder }) {
     this.idGenerator = idGenerator;

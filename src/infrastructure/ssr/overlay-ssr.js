@@ -18,4 +18,21 @@ router.get('/:id', async (req, res) => {
 });
 
 
+router.get('/events/:id', async (req, res) => {
+    const {id} = req.params;
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.write(`data: 111 \n\n`);
+    try {
+        const pubsubRedis = container.resolve('redisPubSubMessage')
+        await pubsubRedis.subscribe(id);
+        await pubsubRedis.listen((channelListen, message) => {
+          res.write(`event: message\n`);
+          res.write(`data: ${message}\n\n`);
+        });
+    } catch (error) {
+        console.log(error)        
+    }
+
+});
+
 module.exports = router;

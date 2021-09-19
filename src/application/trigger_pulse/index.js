@@ -1,6 +1,6 @@
-const GetPluginResponse = require('./get-plugin-response');
 
-class GetPlugin {
+
+class TriggerPulse {
   constructor({ pluginRepository, userRepository, triggerBuilder, redisPubSubMessage }) {
     this.pluginRepository = pluginRepository;
     this.userRepository = userRepository;
@@ -8,29 +8,33 @@ class GetPlugin {
     this.redisPubSubMessage = redisPubSubMessage;
   }
 
-  async get({ id, candidateOwner }) {
+  async trigger({ id, candidateOwner, name }) {
     //TODO: Check if plugin exists
     const domain = await this.pluginRepository.find(id)
 
     const userDomain = await this.userRepository.find(domain.ownerId);
     this._checkIfOwnerExists(userDomain)
     this._checkIfIsPrivateAndCheckOwner(domain, candidateOwner)
-    // this.redisPubSubMessage.publish({channel: 'test2', message: 'She'})
+    const currentTrigger = this._findTrigger(name, domain)
 
-    const formatDomain = domain.toObject()
-    
-    return new GetPluginResponse({
-      id: formatDomain.id,
-      name: formatDomain.name,
-      source: formatDomain.source,
-      ownerId: formatDomain.ownerId,
-      isPrivate: formatDomain.isPrivate,
-      triggers: this.triggerBuilder.make(formatDomain.triggers)
-    });
+    this.redisPubSubMessage.publish({ channel: id, message: JSON.stringify(currentTrigger.toObject())});
+  }
+
+  _findTrigger(triggerName, plugin) {
+    if (!triggerName) {
+      throw new Error("Trigger name not present")
+    }
+
+    const triggerInformation = plugin.triggers.find(trigger => trigger.name == triggerName);
+    if (!triggerInformation) {
+      throw new Error("Trigger not found")
+    }
+
+    return triggerInformation
   }
 
   _checkIfOwnerExists(user) {
-    if(!user){
+    if (!user) {
       throw new Error("Owner not exists")
     }
   }
@@ -42,4 +46,4 @@ class GetPlugin {
   }
 }
 
-module.exports = GetPlugin;
+module.exports = TriggerPulse;

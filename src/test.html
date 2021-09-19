@@ -1,0 +1,15 @@
+<h1>HEY</h1>
+<script>
+    const es = new EventSource('http://localhost:3000/overlay/events/b40d6944-374b-4866-9ba8-ac404264bdad');
+    es.addEventListener('message', listener);
+    function listener(event) {
+        myT(event.data)
+    };
+
+
+    function myT(data) {
+        console.log('INSIDE')
+        console.log(data)
+    }
+
+</script>
