@@ -30,6 +30,10 @@ class TriggerPulse {
       throw new Error("Trigger not found")
     }
 
+    if(triggerInformation.type != 'pulse'){
+      throw new Error("Trigger is not a 'pulse' type")
+    }
+
     return triggerInformation
   }
 

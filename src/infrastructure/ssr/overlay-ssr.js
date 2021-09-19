@@ -17,11 +17,10 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-
+// TODO: Split this in other controller
 router.get('/events/:id', async (req, res) => {
     const {id} = req.params;
     res.setHeader('Content-Type', 'text/event-stream');
-    res.write(`data: 111 \n\n`);
     try {
         const pubsubRedis = container.resolve('redisPubSubMessage')
         await pubsubRedis.subscribe(id);
