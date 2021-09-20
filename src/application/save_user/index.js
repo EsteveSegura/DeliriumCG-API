@@ -8,15 +8,15 @@ class SaveUser {
     this.userRepository = userRepository;
   }
 
-  async save({ text }) {
+  async save({ twitchUsername }) {
     const id = this.idGenerator.generate();
     const token = await this.TokenGenerator.generate({ id })
     const currentDate = new Date();
-    const userDomain = new User({ id, text, token, createdAt: currentDate, updatedAt: currentDate });
+    const userDomain = new User({ id, text, token, twitchUsername, createdAt: currentDate, updatedAt: currentDate });
 
     this.userRepository.save(userDomain)
 
-    return new SaveUserResponse({ id: userDomain.id });
+    return new SaveUserResponse({ id: userDomain.id, token });
   }
 }
 

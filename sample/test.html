@@ -7,12 +7,12 @@
     function listener(event) {
         onMessage(event.data)
     };
-    
+
     let overlayDiv = document.querySelector('.overlay')
 
     function onMessage(data) {
         if (data.pulseToSend == 'play_sound_fear_huge') {
-        overlayDiv.innerHTML = overlayDiv.innerHTML + '<p>Playing huge scary sound!</p>'
+            overlayDiv.innerHTML = overlayDiv.innerHTML + '<p>Playing huge scary sound!</p>'
         }
     };
 </script>

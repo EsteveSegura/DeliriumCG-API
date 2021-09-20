@@ -1,6 +1,7 @@
 class SaveUserResponse {
-  constructor({id}) {
+  constructor({id, token}) {
     this.id = id;
+    this.token = token;
   }
 }
 

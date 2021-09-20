@@ -1,6 +1,6 @@
 class SaveUserCommand {
-  constructor({text}) {
-    this.text = text;
+  constructor({twitchUsername}) {
+    this.twitchUsername = twitchUsername;
   }
 }
 
