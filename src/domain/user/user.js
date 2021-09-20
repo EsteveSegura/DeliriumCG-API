@@ -9,6 +9,18 @@ class User {
     this.createdAt = createdAt;
   }
 
+  set twitchUsername(twitchUsername) {
+    if (!twitchUsername) {
+      throw new InvalidUserError('Field twitchUsername cannot be empty');
+    }
+
+    this._twitchUsername = twitchUsername;
+  }
+
+  get twitchUsername() {
+    return this._twitchUsername;
+  }
+
   set id(id) {
     if (!id) {
       throw new InvalidUserError('Field id cannot be empty');

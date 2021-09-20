@@ -1,10 +1,10 @@
 const GetPluginResponse = require('./display-plugin-response');
 
 class DisplayPlugin {
-  constructor({ pluginRepository, userRepository, triggerBuilder }) {
+  constructor({ pluginRepository, userRepository, coreInjectable }) {
     this.pluginRepository = pluginRepository;
     this.userRepository = userRepository;
-    this.triggerBuilder = triggerBuilder;
+    this.coreInjectable = coreInjectable;
   }
 
   async display({ id }) {
@@ -13,8 +13,9 @@ class DisplayPlugin {
     const userDomain = await this.userRepository.find(domain.ownerId);
     this._checkIfOwnerExists(userDomain)
 
-    const formatDomain = domain.toObject()
-    return new GetPluginResponse({ source: formatDomain.source });
+    const core = this.coreInjectable.get({id, twitchUsername: userDomain.twitchUsername, source: domain.source})
+
+    return new GetPluginResponse({ source: core });
   }
 
   _checkIfOwnerExists(user) {

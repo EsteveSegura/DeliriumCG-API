@@ -5,9 +5,9 @@ const container = require('../../container');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const {text} = req.body;
+  const {twitchUsername} = req.body;
   try {
-    const command = new SaveUserCommand({text});
+    const command = new SaveUserCommand({twitchUsername});
     const saveUser = container.resolve('saveUser');
     const response = await saveUser.save(command);
 

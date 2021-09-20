@@ -13,7 +13,6 @@ class GetPlugin {
     const domain = await this.pluginRepository.find(id)
 
     const userDomain = await this.userRepository.find(domain.ownerId);
-    console.log(userDomain)
     this._checkIfOwnerExists(userDomain)
     this._checkIfIsPrivateAndCheckOwner(domain, candidateOwner)
     // this.redisPubSubMessage.publish({channel: 'test2', message: 'She'})

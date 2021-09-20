@@ -20,6 +20,7 @@ const userDocumentParser = require('./infrastructure/persistence/mongo/user-docu
 const pluginDocumentParser = require('./infrastructure/persistence/mongo/plugin-domain-parser');
 const triggerDomainBuilder = require('./infrastructure/persistence/mongo/trigger-domain-builder');
 const redisPubSubMessage = require('./infrastructure/pubsub/redis-pubsub-message')
+const coreInjectable = require('./infrastructure/services/core-injectable');
 
 const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.PROXY,
@@ -46,6 +47,7 @@ container.register({
   pluginDocumentParser: awilix.asFunction(pluginDocumentParser),
   triggerBuilder: awilix.asFunction(triggerDomainBuilder),
   redisPubSubMessage: awilix.asClass(redisPubSubMessage),
+  coreInjectable: awilix.asClass(coreInjectable),
 });
 
 module.exports = container;

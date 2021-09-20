@@ -12,7 +12,7 @@ class SaveUser {
     const id = this.idGenerator.generate();
     const token = await this.TokenGenerator.generate({ id })
     const currentDate = new Date();
-    const userDomain = new User({ id, text, token, twitchUsername, createdAt: currentDate, updatedAt: currentDate });
+    const userDomain = new User({ id, token, twitchUsername, createdAt: currentDate, updatedAt: currentDate });
 
     this.userRepository.save(userDomain)
 

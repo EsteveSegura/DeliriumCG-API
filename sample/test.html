@@ -1,19 +1,38 @@
-<div class= 'overlay '>
-    <h1>HEY</h1>
-</div>
+<script src='https://alca.sfo2.cdn.digitaloceanspaces.com/tmijs/1.4.2/tmi.min.js'></script>
 <script>
-    const es = new EventSource('http://localhost:3000/overlay/events/dcae78ec-96c0-4127-acc8-07c477df542c'); //REMEMBER TO CUSTOMIZE THE ID
+    const client = new tmi.Client({
+        channels: ['girlazo']
+    });
+    client.connect();
+    client.on('message', (channel, tags, message, self) => {
+        onTwitchMessage(tags['display-name'], message)
+    });
+</script>
+<script>
+    const es = new EventSource('http://localhost:3000/overlay/events/7e7f6bd3-62ee-4bd9-9c3d-9560e64fb38f');
     es.addEventListener('message', listener);
     function listener(event) {
         onMessage(event.data)
-    };
+    }
+</script>
 
+
+
+<div class='overlay '>
+    <h1>HEY</h1>
+</div>
+<script>
     let overlayDiv = document.querySelector('.overlay')
 
     function onMessage(data) {
         if (data.pulseToSend == 'play_sound_fear_huge') {
             overlayDiv.innerHTML = overlayDiv.innerHTML + '<p>Playing huge scary sound!</p>'
         }
-    };
-</script>
+    }
 
+    function onTwitchMessage(user, message) {
+        if(message == '!stop'){
+            overlayDiv.innerHTML = `${overlayDiv.innerHTML}<p>the twitch user: ${user} has stopped the sound!</p>`
+        }
+    }
+</script>
