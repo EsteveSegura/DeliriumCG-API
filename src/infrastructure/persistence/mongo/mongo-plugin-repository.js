@@ -18,12 +18,12 @@ class MongoPluginRepository extends PluginRepository {
     }
   }
 
-  async findByToken(token) {
+  async findByOwnerId(ownerId) {
     const db = await this.mongoDbHandler.getInstance();
     try {
-      const pluginDocument = await db.collection('plugins').findOne({token});
+      const pluginDocuments = await db.collection('plugins').find({ownerId}).toArray();
 
-      return pluginDocument ? this.pluginDocumentParser.toDomain(pluginDocument) : null;
+      return pluginDocuments.length !== 0 ? pluginDocuments.map((document) => this.pluginDocumentParser.toDomain(document)) : [];
     } catch ({message}) {
       throw new Error(message);
     }

@@ -19,7 +19,7 @@ class Plugin {
             source: this.source,
             ownerId: this.ownerId,
             isPrivate: this.isPrivate,
-            triggers: this.triggers,
+            triggers: this.triggers.map(trigger => trigger.toObject()),
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
         }
