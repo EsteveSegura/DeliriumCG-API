@@ -14,6 +14,7 @@ const savePlugin = require('./application/save_plugin/index');
 const getPlugin = require('./application/get_plugin/index');
 const displayPlugin = require('./application/display_plugin/index');
 const triggerPulse = require('./application/trigger_pulse/index');
+const authUser = require('./application/auth_user/');
 const mongoDbHandler = require('./infrastructure/persistence/mongo/db-handler');
 const RedisDbHandler = require('./infrastructure/pubsub/redis-handler');
 const userDocumentParser = require('./infrastructure/persistence/mongo/user-document-parser');
@@ -41,6 +42,7 @@ container.register({
   getPlugin: awilix.asClass(getPlugin),
   displayPlugin: awilix.asClass(displayPlugin),
   triggerPulse: awilix.asClass(triggerPulse),
+  authUser: awilix.asClass(authUser),
   mongoDbHandler: awilix.asFunction(mongoDbHandler).singleton(),
   redisDbHandler: awilix.asClass(RedisDbHandler),
   userDocumentParser: awilix.asFunction(userDocumentParser),
