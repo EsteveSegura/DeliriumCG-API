@@ -1,0 +1,95 @@
+<style>
+    body {
+        font-family: sans-serif;
+    }
+
+    .button {
+        background-color: gray;
+        color: white;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        margin: 90px 40px;
+        cursor: pointer;
+    }
+
+    #traffic-light {
+        height: 550px;
+        width: 200px;
+        float: left;
+        background-color: #333;
+        border-radius: 40px;
+        margin: 30px 0;
+        padding: 20px;
+    }
+
+    .bulb {
+        height: 150px;
+        width: 150px;
+        background-color: #111;
+        border-radius: 50%;
+        margin: 25px auto;
+        transition: background 500ms;
+    }
+</style>
+<div id='traffic-light'>
+    <div id='stopLight' class='bulb'></div>
+    <div id='slowLight' class='bulb'></div>
+    <div id='goLight' class='bulb'></div>
+</div>
+
+<script>
+    function onTwitchMessage(user, message) {
+        if (message == '!clear') {
+            clearLights()
+        }
+        if (message == '!green') {
+            illuminateGreen()
+        }
+        if (message == '!red') {
+            illuminateRed()
+        }
+        if (message == '!yellow') {
+            illuminateYellow()
+        }
+    }
+    function onMessage(data) {
+        let parseData = JSON.parse(data)
+
+        if (parseData.pulseToSend == 'clear') {
+            clearLights()
+        }
+        if (parseData.pulseToSend == 'green') {
+            illuminateGreen()
+        }
+        if (parseData.pulseToSend == 'red') {
+            illuminateRed()
+        }
+        if (parseData.pulseToSend == 'yellow') {
+            illuminateYellow()
+        }
+    }
+
+    function illuminateRed() {
+        clearLights();
+        document.getElementById('stopLight').style.backgroundColor = 'red';
+    }
+
+    function illuminateYellow() {
+        clearLights();
+        document.getElementById('slowLight').style.backgroundColor = 'yellow';
+    }
+
+    function illuminateGreen() {
+        clearLights();
+        document.getElementById
+            ('goLight').style.backgroundColor =
+            'green';
+    }
+
+    function clearLights() {
+        document.getElementById('stopLight').style.backgroundColor = 'black';
+        document.getElementById('slowLight').style.backgroundColor = 'black';
+        document.getElementById('goLight').style.backgroundColor = 'black';
+    }
+</script>
