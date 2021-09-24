@@ -1,6 +1,7 @@
 const express = require('express');
 const SavePluginCommand = require('../../application/save_plugin/save-plugin-command');
 const GetPluginCommand = require('../../application/get_plugin/get-plugin-command');
+const ListPluginsCommand = require('../../application/list_plugins/list-plugins-command');
 const transferPluginCommand = require('../../application/transfer_plugin/transfer-plugin-command');
 const TriggerPulseCommand = require('../../application/get_plugin/get-plugin-command');
 const container = require('../../container');
@@ -33,6 +34,19 @@ router.put('/:id/transfer', verifyToken, async (req, res) => {
     await transferPlugin.transfer(command);
 
     res.status(200).json();
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({error: error.toString()});
+  }
+});
+
+router.get('/', verifyToken, async (req, res) => {
+  try {
+    const command = new ListPluginsCommand({showPrivatePlugins: false});
+    const listPlugins = container.resolve('listPlugins');
+    const response = await listPlugins.list(command);
+
+    res.status(200).json({...response});
   } catch (error) {
     console.log(error)
     res.status(500).json({error: error.toString()});

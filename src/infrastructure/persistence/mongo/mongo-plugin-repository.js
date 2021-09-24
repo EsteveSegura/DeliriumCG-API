@@ -29,22 +29,9 @@ class MongoPluginRepository extends PluginRepository {
     }
   }
 
-  async findByAccountId(accountId) {
+  async findAllByPrivate(isPrivate) {
     const db = await this.mongoDbHandler.getInstance();
-    const pluginDocument = await db.collection('plugins').findOne({accountId});
-    return pluginDocument ? this.pluginDocumentParser.toDomain(pluginDocument) : null;
-  }
-
-  async findByChannelId(channelId) {
-    const db = await this.mongoDbHandler.getInstance();
-    const pluginDocument = await db.collection('plugins').findOne({channelId});
-
-    return pluginDocument ? this.pluginDocumentParser.toDomain(pluginDocument) : null;
-  }
-
-  async findAllByChannelId(channelId) {
-    const db = await this.mongoDbHandler.getInstance();
-    const documents = await db.collection('plugins').find({channelId}).toArray();
+    const documents = await db.collection('plugins').find({isPrivate}).toArray();
 
     return documents.length !== 0 ? documents.map((document) => this.pluginDocumentParser.toDomain(document)) : [];
   }
