@@ -25,6 +25,15 @@ class Plugin {
         }
     }
 
+    setPluginToPrivate(){
+        this.isPrivate = true;
+    }
+
+    changeOwner({newOwnerId,newPluginId}){
+        this.ownerId = newOwnerId;
+        this.id = newPluginId;
+    }
+
     addTrigger(trigger) {
         if (!trigger) {
             throw new InvalidPluginError('No trigger specified');

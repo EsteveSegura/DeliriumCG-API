@@ -1,0 +1,20 @@
+<h1 class='title'>Start Count</h1>
+<script>
+    let titleDiv = document.querySelector('.title')
+    let count = 0;
+
+    function onMessage(data) {
+        count = count + 1;
+        let parseData = JSON.parse(data)
+        if (parseData.pulseToSend == 'add_one_to_count') {
+            titleDiv.innerHTML = count + 'by: you'
+        }
+    }
+
+    function onTwitchMessage(user, message) {
+        count = count + 1;
+        if (message == '!count') {
+            titleDiv.innerHTML = count + 'by: ' + user
+        }
+    }
+</script>

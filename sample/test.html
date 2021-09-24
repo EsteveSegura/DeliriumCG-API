@@ -12,8 +12,8 @@
     }
 
     function onTwitchMessage(user, message) {
-        if(message == '!stop'){
-            overlayDiv.innerHTML = `${overlayDiv.innerHTML}<p>the twitch user: ${user} has stopped the sound!</p>`
+        if(message == '!count'){
+            titleDiv.innerHTML = count + 'by: ' + user
         }
     }
 </script>
