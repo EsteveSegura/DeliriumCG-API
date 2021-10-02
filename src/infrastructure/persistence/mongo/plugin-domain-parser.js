@@ -9,6 +9,9 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
       ownerId,
       isPrivate,
       source,
+      height,
+      width,
+      description,
       triggers,
       updatedAt }) => {
       const id = (muuid.from(_id)).toString();
@@ -18,6 +21,9 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
         ownerId,
         isPrivate,
         source: source.join('\n'),
+        height,
+        width,
+        description,
         triggers: triggerBuilder.build(triggers),
         createdAt,
         updatedAt
@@ -30,6 +36,9 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
       ownerId,
       isPrivate,
       source,
+      height,
+      width,
+      description,
       triggers,
       updatedAt }) => {
       const _id = muuid.from(id);
@@ -40,6 +49,9 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
         ownerId,
         isPrivate,
         source: source.split('\n'),
+        height,
+        width,
+        description,
         triggers: triggerBuilder.make(triggers),
         updatedAt
       };

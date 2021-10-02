@@ -1,15 +1,18 @@
 const InvalidPluginError = require('./error/invalid-plugin-error');
 
 class Plugin {
-    constructor({ id, name, source, ownerId, isPrivate,  triggers, createdAt, updatedAt }) {
+    constructor({ id, name, source, ownerId, isPrivate, triggers, height, width, description, createdAt, updatedAt }) {
         this.id = id;
         this.name = name
         this.source = source;
         this.ownerId = ownerId;
         this.isPrivate = isPrivate;
+        this.triggers = triggers;
+        this.height = height;
+        this.width = width;
+        this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.triggers = triggers;
     }
 
     toObject() {
@@ -20,16 +23,19 @@ class Plugin {
             ownerId: this.ownerId,
             isPrivate: this.isPrivate,
             triggers: this.triggers.map(trigger => trigger.toObject()),
+            height: this.height,
+            width: this.width,
+            description: this.description,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
         }
     }
 
-    setPluginToPrivate(){
+    setPluginToPrivate() {
         this.isPrivate = true;
     }
 
-    changeOwner({newOwnerId,newPluginId}){
+    changeOwner({ newOwnerId, newPluginId }) {
         this.ownerId = newOwnerId;
         this.id = newPluginId;
     }
@@ -50,17 +56,53 @@ class Plugin {
         return id == this.ownerId
     }
 
-     set triggers(triggers) {
-        if (!triggers) {
-          throw new InvalidPluginError('Field triggers cannot be empty');
+    set description(description) {
+        if (!description) {
+            throw new InvalidPluginError('Field description cannot be empty');
         }
-    
+
+        this._description = description;
+    }
+
+    get description() {
+        return this._description;
+    }
+
+    set width(width) {
+        if (!width) {
+            throw new InvalidPluginError('Field width cannot be empty');
+        }
+
+        this._width = width;
+    }
+
+    get width() {
+        return this._width;
+    }
+
+    set height(height) {
+        if (!height) {
+            throw new InvalidPluginError('Field height cannot be empty');
+        }
+
+        this._height = height;
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set triggers(triggers) {
+        if (!triggers) {
+            throw new InvalidPluginError('Field triggers cannot be empty');
+        }
+
         this._triggers = triggers;
-      }
-    
-      get triggers() {
+    }
+
+    get triggers() {
         return this._triggers;
-      }
+    }
 
     set ownerId(ownerId) {
         if (!ownerId) {

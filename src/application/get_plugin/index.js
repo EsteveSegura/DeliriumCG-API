@@ -18,19 +18,22 @@ class GetPlugin {
     // this.redisPubSubMessage.publish({channel: 'test2', message: 'She'})
 
     const formatDomain = domain.toObject()
-    
+
     return new GetPluginResponse({
       id: formatDomain.id,
       name: formatDomain.name,
       source: formatDomain.source,
       ownerId: formatDomain.ownerId,
       isPrivate: formatDomain.isPrivate,
+      description: formatDomain.description,
+      height: formatDomain.height,
+      width: formatDomain.width,
       triggers: this.triggerBuilder.make(formatDomain.triggers)
     });
   }
 
   _checkIfOwnerExists(user) {
-    if(!user){
+    if (!user) {
       throw new Error("Owner not exists")
     }
   }

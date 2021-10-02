@@ -9,7 +9,7 @@ class SavePlugin {
     this.triggerBuilder = triggerBuilder;
   }
 
-  async save({ name, source, ownerId, isPrivate = true, triggers }) {
+  async save({ name, source, ownerId, isPrivate = true, height, width, description, triggers }) {
     const findOwner = await this.userRepository.find(ownerId)
     this._checkIfOwnerExists(findOwner);
 
@@ -23,6 +23,9 @@ class SavePlugin {
       source,
       ownerId,
       isPrivate,
+      height,
+      width,
+      description,
       triggers: pluginTriggers,
       createdAt: currentDate,
       updatedAt: currentDate
