@@ -2,9 +2,11 @@ const awilix = require('awilix');
 
 const {promisify} = require('util');
 const { v4: uuidv4 } = require('uuid');
+const axios = require('axios');
 const crypto = require('crypto');
 const jsonwebtoken = require('jsonwebtoken');
 const JwtGenerator = require('./infrastructure/services/jwt-generator');
+const TwitchClient = require('./infrastructure/services/twitch-client');
 const idGenerator = require('./domain/services/id-generator');
 const MUUID = require('uuid-mongodb');
 const MongoUserRepository = require('./infrastructure/persistence/mongo/mongo-user-repository')
@@ -33,8 +35,10 @@ const container = awilix.createContainer({
 container.register({
   promisify: awilix.asValue(promisify),
   uuidv4: awilix.asValue(uuidv4),
+  axios: awilix.asValue(axios),
   crypto: awilix.asValue(crypto),
   jwt: awilix.asValue(jsonwebtoken),
+  TwitchClient: awilix.asClass(TwitchClient),
   TokenGenerator: awilix.asClass(JwtGenerator),
   idGenerator: awilix.asFunction(idGenerator),
   muuid: awilix.asValue(MUUID),

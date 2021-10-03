@@ -8,9 +8,9 @@ const verifyToken = require('./middleware/verify-token');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { twitchUsername } = req.body;
+  const { twitchToken } = req.body;
   try {
-    const command = new SaveUserCommand({ twitchUsername });
+    const command = new SaveUserCommand({ twitchToken });
     const saveUser = container.resolve('saveUser');
     const response = await saveUser.save(command);
 

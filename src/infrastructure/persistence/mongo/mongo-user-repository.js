@@ -18,6 +18,17 @@ class MongoUserRepository extends UserRepository {
     }
   }
 
+  async findByTwitchName(twitchUsername) {
+    const db = await this.mongoDbHandler.getInstance();
+    try {
+      const userDocument = await db.collection('users').findOne({twitchUsername});
+
+      return userDocument ? this.userDocumentParser.toDomain(userDocument) : null;
+    } catch ({message}) {
+      throw new Error(message);
+    }
+  }
+
   async findByToken(token) {
     const db = await this.mongoDbHandler.getInstance();
     try {
