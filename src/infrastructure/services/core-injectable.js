@@ -1,3 +1,5 @@
+const {injectable: {urlInjectableSSE}} = require('../config')
+
 class CoreInjectable {
     get({ id, twitchUsername, source }) {
         const injectable = `<script src='https://alca.sfo2.cdn.digitaloceanspaces.com/tmijs/1.4.2/tmi.min.js'></script>
@@ -11,7 +13,7 @@ class CoreInjectable {
             });
         </script>
         <script>
-            const es = new EventSource('http://localhost:3000/overlay/events/${id}');
+            const es = new EventSource('${urlInjectableSSE}/overlay/events/${id}');
             es.addEventListener('message', listener);
             function listener(event) {
                 onMessage(event.data)

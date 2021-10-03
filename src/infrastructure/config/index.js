@@ -11,6 +11,9 @@ const run = {
     redisConnectionUri: process.env.REDIS_CONNECTION || 'redis://127.0.0.1/',
     authCodeExpiration: process.env.AUTH_CODE_EXPIRATION || 7200,
   },
+  injectable:{
+    urlInjectableSSE: process.env.INJECTABLE_URL_SSE || 'http://localhost:3000'
+  },
   tokenSigner:{
     cryptoKey: process.env.TOKEN_SIGNATURE || 'HQdbSM6Wfcd6rseArxTmQeR8RxBNj6dyUm3RNFQQQWdcmpxtqpWZcB4xErCBjQXMcWe66vHFj4Gxq'
   },
@@ -32,6 +35,9 @@ const test = {
     redisTimeOut: process.env.REDIS_TIMEOUT || 60,
     redisConnectionUri: process.env.REDIS_CONNECTION || 'localhost:6379',
     authCodeExpiration: process.env.AUTH_CODE_EXPIRATION || 7200,
+  },
+  injectable:{
+    urlInjectableSSE: process.env.INJECTABLE_URL_SSE || 'http://localhost:3000'
   },
   tokenSigner:{
     cryptoKey: process.env.TOKEN_SIGNATURE || 'HQdbSM6Wfcd6rseArxTmQeR8RxBNj6dyUm3RNFQQQWdcmpxtqpWZcB4xErCBjQXMcWe66vHFj4Gxq'
