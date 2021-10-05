@@ -20,6 +20,8 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/plugins', pluginRoutes);
 app.use('/health', healthRoutes);
 
+app.use('/static', express.static(__dirname + '/public'));
+
 app.use('/overlay', overlaySsr);
 
 const server = app.listen(port, () => console.log(`App running on http://localhost:${port}`));
