@@ -1,0 +1,112 @@
+<style>
+    html {
+        box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Roboto', sans-serif;
+        color: #47454c;
+        background: #eee;
+    }
+
+    .title {
+        margin: 0 0 30px 0;
+    }
+
+    #form {
+        padding: 25px;
+        max-width: 500px;
+        background: #fff;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-bottom: 5px solid #ddd;
+        border-radius: 5px;
+        transition: all .23s;
+    }
+
+    #form h2 {
+        margin: 0 0 25px 0;
+        font-size: 10em;
+        text-shadow:
+            0 1px rgb(31, 31, 31),
+            0 2px rgb(31, 31, 31),
+            0 3px rgb(31, 31, 31),
+            0 4px rgb(31, 31, 31),
+            0 5px rgb(31, 31, 31),
+            0 6px rgb(31, 31, 31);
+    }
+
+    #form button {
+        width: 100%;
+        padding: 10px 75px;
+        background: tomato;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        border-bottom: 5px solid orangered;
+        font-size: 2.25em;
+        outline: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all .23s;
+    }
+</style>
+<div class="container">
+    <form id="form">
+        <h2 id="number"></h2>
+    </form>
+</div>
+
+<script>
+    const number = document.getElementById("number");
+
+    let isFlipping = false;
+    let [min, max] = [1, 7];
+    const dly = 100;
+
+    number.innerHTML = "N";
+
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function giveMeARandom() {
+        if (isFlipping) return;
+        isFlipping = true;
+
+        setTimeout(() => {
+            number.innerHTML = ".";
+            setTimeout(() => {
+                number.innerHTML = "..";
+                setTimeout(() => {
+                    number.innerHTML = "...";
+                    setTimeout(() => {
+                        number.innerHTML = rand(min, max);;
+                        isFlipping = false;
+                    }, dly);
+                }, dly);
+            }, dly);
+        }, dly);
+    }
+
+
+    function onMessage(data) {
+        let parseData = JSON.parse(data)
+        if (parseData.pulseToSend == 'roll') {
+            giveMeARandom()
+        }
+    }
+
+</script>

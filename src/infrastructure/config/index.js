@@ -12,7 +12,8 @@ const run = {
     authCodeExpiration: process.env.AUTH_CODE_EXPIRATION || 7200,
   },
   injectable:{
-    urlInjectableSSE: process.env.INJECTABLE_URL_SSE || 'http://localhost:3000'
+    urlInjectableSSE: process.env.INJECTABLE_URL_SSE || 'http://localhost:3000',
+    injectableTwitchUrl: process.env.INJECTABLE_TWITCH_URL || 'https://alca.sfo2.cdn.digitaloceanspaces.com/tmijs/1.4.2/tmi.min.js'
   },
   tokenSigner:{
     cryptoKey: process.env.TOKEN_SIGNATURE || 'HQdbSM6Wfcd6rseArxTmQeR8RxBNj6dyUm3RNFQQQWdcmpxtqpWZcB4xErCBjQXMcWe66vHFj4Gxq'
@@ -37,7 +38,8 @@ const test = {
     authCodeExpiration: process.env.AUTH_CODE_EXPIRATION || 7200,
   },
   injectable:{
-    urlInjectableSSE: process.env.INJECTABLE_URL_SSE || 'http://localhost:3000'
+    urlInjectableSSE: process.env.INJECTABLE_URL_SSE || 'http://localhost:3000',
+    injectableTwitchUrl: process.env.INJECTABLE_TWITCH_URL || 'https://alca.sfo2.cdn.digitaloceanspaces.com/tmijs/1.4.2/tmi.min.js'
   },
   tokenSigner:{
     cryptoKey: process.env.TOKEN_SIGNATURE || 'HQdbSM6Wfcd6rseArxTmQeR8RxBNj6dyUm3RNFQQQWdcmpxtqpWZcB4xErCBjQXMcWe66vHFj4Gxq'
