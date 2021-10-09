@@ -2,15 +2,15 @@ const SavePluginResponse = require('./save-plugin-response');
 const Plugin = require('../../domain/plugin/plugin');
 
 class SavePlugin {
-  constructor({ idGenerator, pluginRepository, userRepository, triggerBuilder }) {
+  constructor({idGenerator, pluginRepository, userRepository, triggerBuilder}) {
     this.idGenerator = idGenerator;
     this.pluginRepository = pluginRepository;
     this.userRepository = userRepository;
     this.triggerBuilder = triggerBuilder;
   }
 
-  async save({ name, source, ownerId, isPrivate = true, height, width, description, triggers }) {
-    const findOwner = await this.userRepository.find(ownerId)
+  async save({name, source, ownerId, isPrivate = true, height, width, description, triggers}) {
+    const findOwner = await this.userRepository.find(ownerId);
     this._checkIfOwnerExists(findOwner);
 
     const pluginTriggers = this.triggerBuilder.build(triggers);
@@ -28,16 +28,16 @@ class SavePlugin {
       description,
       triggers: pluginTriggers,
       createdAt: currentDate,
-      updatedAt: currentDate
+      updatedAt: currentDate,
     });
 
-    this.pluginRepository.save(pluginDomain)
-    return new SavePluginResponse({ id: pluginDomain.id });
+    this.pluginRepository.save(pluginDomain);
+    return new SavePluginResponse({id: pluginDomain.id});
   }
 
   _checkIfOwnerExists(owner) {
     if (!owner) {
-      throw new Error('Owner not exists.')
+      throw new Error('Owner not exists.');
     }
   }
 }

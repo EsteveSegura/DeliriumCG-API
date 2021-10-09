@@ -16,7 +16,7 @@ class RedisHandler {
       }});
 
       this._client.on('error', ({message}) => {
-        console.log(message)
+        console.log(message);
       });
     }
     return this._client;

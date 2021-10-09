@@ -1,15 +1,15 @@
-const { tokenSigner: { cryptoKey } } = require('../config/');
+const {tokenSigner: {cryptoKey}} = require('../config/');
 
 class JwtGenerator {
-    constructor({ jwt }) {
-        this.jwt = jwt;
-    }
+  constructor({jwt}) {
+    this.jwt = jwt;
+  }
 
-    async generate({ id }) {
-        const tokenGenerated = await this.jwt.sign({ id }, cryptoKey);
+  async generate({id}) {
+    const tokenGenerated = await this.jwt.sign({id}, cryptoKey);
 
-        return tokenGenerated;
-    }
+    return tokenGenerated;
+  }
 }
 
 module.exports = JwtGenerator;

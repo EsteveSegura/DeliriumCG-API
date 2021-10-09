@@ -6,7 +6,6 @@ class UserRepository {
   async save(user) {
     throw new Error('Method not implemented yet');
   }
-
 }
 
 module.exports = UserRepository;

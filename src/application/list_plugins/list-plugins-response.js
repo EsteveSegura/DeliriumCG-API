@@ -1,5 +1,5 @@
 class ListPluginResponse {
-  constructor({ plugins }) {
+  constructor({plugins}) {
     this.plugins = plugins;
   }
 }

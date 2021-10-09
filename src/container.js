@@ -1,7 +1,7 @@
 const awilix = require('awilix');
 
 const {promisify} = require('util');
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 const axios = require('axios');
 const crypto = require('crypto');
 const jsonwebtoken = require('jsonwebtoken');
@@ -9,8 +9,8 @@ const JwtGenerator = require('./infrastructure/services/jwt-generator');
 const TwitchClient = require('./infrastructure/services/twitch-client');
 const idGenerator = require('./domain/services/id-generator');
 const MUUID = require('uuid-mongodb');
-const MongoUserRepository = require('./infrastructure/persistence/mongo/mongo-user-repository')
-const MongoPluginRepository = require('./infrastructure/persistence/mongo/mongo-plugin-repository')
+const MongoUserRepository = require('./infrastructure/persistence/mongo/mongo-user-repository');
+const MongoPluginRepository = require('./infrastructure/persistence/mongo/mongo-plugin-repository');
 const saveUser = require('./application/save_user/index');
 const savePlugin = require('./application/save_plugin/index');
 const getPlugin = require('./application/get_plugin/index');
@@ -18,14 +18,14 @@ const displayPlugin = require('./application/display_plugin/index');
 const triggerPulse = require('./application/trigger_pulse/index');
 const authUser = require('./application/auth_user/');
 const getUser = require('./application/get_user');
-const transferPlugin = require('./application/transfer_plugin')
-const listPlugins = require('./application/list_plugins')
+const transferPlugin = require('./application/transfer_plugin');
+const listPlugins = require('./application/list_plugins');
 const mongoDbHandler = require('./infrastructure/persistence/mongo/db-handler');
 const RedisDbHandler = require('./infrastructure/pubsub/redis-handler');
 const userDocumentParser = require('./infrastructure/persistence/mongo/user-document-parser');
 const pluginDocumentParser = require('./infrastructure/persistence/mongo/plugin-domain-parser');
 const triggerDomainBuilder = require('./infrastructure/persistence/mongo/trigger-domain-builder');
-const redisPubSubMessage = require('./infrastructure/pubsub/redis-pubsub-message')
+const redisPubSubMessage = require('./infrastructure/pubsub/redis-pubsub-message');
 const coreInjectable = require('./infrastructure/services/core-injectable');
 
 const container = awilix.createContainer({

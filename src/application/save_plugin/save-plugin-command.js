@@ -1,5 +1,5 @@
 class SavePluginCommand {
-  constructor({ name, source, ownerId, isPrivate, height, width, description, triggers }) {
+  constructor({name, source, ownerId, isPrivate, height, width, description, triggers}) {
     this.name = name;
     this.source = source;
     this.ownerId = ownerId;

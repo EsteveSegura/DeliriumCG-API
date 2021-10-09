@@ -1,8 +1,8 @@
-const {injectable: {urlInjectableSSE, injectableTwitchUrl}} = require('../config')
+const {injectable: {urlInjectableSSE, injectableTwitchUrl}} = require('../config');
 
 class CoreInjectable {
-    get({ id, twitchUsername, source }) {
-        const injectable = `<script src='${injectableTwitchUrl}'></script>
+  get({id, twitchUsername, source}) {
+    const injectable = `<script src='${injectableTwitchUrl}'></script>
         <script>
             const client = new tmi.Client({
                 channels: ['${twitchUsername}']
@@ -18,19 +18,19 @@ class CoreInjectable {
             function listener(event) {
                 onMessage(event.data)
             }
-        </script>`
-        
-        const formatCode = this._injectCodeAfterFirstScripTag(source,injectable)
-        
-        return formatCode;
-    }
+        </script>`;
 
-    _injectCodeAfterFirstScripTag(source, injectable){
-        const splitSource = source.split('<script>')
-        const allCode = `${splitSource[0]}\n${injectable}\n<script>\n${splitSource[1]}`
+    const formatCode = this._injectCodeAfterFirstScripTag(source, injectable);
 
-        return allCode
-    }
+    return formatCode;
+  }
+
+  _injectCodeAfterFirstScripTag(source, injectable) {
+    const splitSource = source.split('<script>');
+    const allCode = `${splitSource[0]}\n${injectable}\n<script>\n${splitSource[1]}`;
+
+    return allCode;
+  }
 }
 
 module.exports = CoreInjectable;

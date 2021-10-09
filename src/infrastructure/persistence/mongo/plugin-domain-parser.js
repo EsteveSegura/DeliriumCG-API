@@ -1,6 +1,6 @@
 const Plugin = require('../../../domain/plugin/plugin');
 
-const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
+const mongoDocumentParser = ({muuid, triggerBuilder}) => {
   return {
     toDomain: ({
       _id,
@@ -13,7 +13,7 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
       width,
       description,
       triggers,
-      updatedAt }) => {
+      updatedAt}) => {
       const id = (muuid.from(_id)).toString();
       return new Plugin({
         id,
@@ -26,7 +26,7 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
         description,
         triggers: triggerBuilder.build(triggers),
         createdAt,
-        updatedAt
+        updatedAt,
       });
     },
     toDocument: ({
@@ -40,7 +40,7 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
       width,
       description,
       triggers,
-      updatedAt }) => {
+      updatedAt}) => {
       const _id = muuid.from(id);
       return {
         _id,
@@ -53,7 +53,7 @@ const mongoDocumentParser = ({ muuid, triggerBuilder }) => {
         width,
         description,
         triggers: triggerBuilder.make(triggers),
-        updatedAt
+        updatedAt,
       };
     },
   };

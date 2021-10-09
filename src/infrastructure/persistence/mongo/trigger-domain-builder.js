@@ -3,28 +3,28 @@ const Pulse = require('../../../domain/plugin/triggers/pulse');
 const triggerBuilder = ({ }) => {
   return {
     build: (triggers) => {
-      const allTriggers = triggers.map(trigger => {
+      const allTriggers = triggers.map((trigger) => {
         switch (trigger.type) {
           case 'pulse':
-            const newTrigger = new Pulse(trigger)
-            return newTrigger
+            const newTrigger = new Pulse(trigger);
+            return newTrigger;
         }
       });
 
       return allTriggers;
     },
     make: (triggers) => {
-      const allTriggers = triggers.map(trigger => {
+      const allTriggers = triggers.map((trigger) => {
         switch (trigger.type) {
           case 'pulse':
-            const newTrigger = new Pulse(trigger)
-            return newTrigger.toObject()
+            const newTrigger = new Pulse(trigger);
+            return newTrigger.toObject();
         }
       });
 
       return allTriggers;
     },
-  }
-}
+  };
+};
 
-module.exports = triggerBuilder
+module.exports = triggerBuilder;

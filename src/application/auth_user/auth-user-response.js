@@ -1,5 +1,5 @@
 class AuthUserResponse {
-  constructor({ id }) {
+  constructor({id}) {
     this.id = id;
   }
 }

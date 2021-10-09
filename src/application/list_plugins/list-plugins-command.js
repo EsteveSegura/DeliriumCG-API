@@ -1,5 +1,5 @@
 class ListPluginCommand {
-  constructor({ showPrivatePlugins }) {
+  constructor({showPrivatePlugins}) {
     this.showPrivatePlugins = showPrivatePlugins;
   }
 }

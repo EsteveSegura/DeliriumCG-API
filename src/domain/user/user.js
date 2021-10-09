@@ -1,7 +1,7 @@
 const InvalidUserError = require('./error/invalid-user-error');
 
 class User {
-  constructor({ id, token, twitchUsername, createdAt, updatedAt }) {
+  constructor({id, token, twitchUsername, createdAt, updatedAt}) {
     this.id = id;
     this.token = token;
     this.twitchUsername = twitchUsername;
@@ -19,6 +19,16 @@ class User {
 
   get twitchUsername() {
     return this._twitchUsername;
+  }
+
+  toObject() {
+    return {
+      id: this.id,
+      token: this.token,
+      twitchUsername: this.twitchUsername,
+      updatedAt: this.updatedAt,
+      createdAt: this.createdAt,
+    };
   }
 
   set id(id) {

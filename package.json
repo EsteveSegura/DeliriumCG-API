@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node ./src/index.js",
     "dev": "nodemon -L ./src/index.js",
-    "lint": "eslint .",
-    "test": "jest --collectCoverage  --testPathPattern=/src/test/unit --forceExit --passWithNoTests"
+    "test": "jest --collectCoverage --testPathPattern=/test/unit --maxWorkers=1 --forceExit --passWithNoTests",
+    "lint": "eslint ."
   },
   "babel": {
     "plugins": [
@@ -54,7 +54,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-throw-expressions": "^7.10.4",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.10.0",
+    "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "jest": "^27.1.1",
     "node-mocks-http": "^1.9.0",

@@ -23,6 +23,7 @@ class MongoPluginRepository extends PluginRepository {
     try {
       const pluginDocuments = await db.collection('plugins').find({ownerId}).toArray();
 
+      // eslint-disable-next-line max-len
       return pluginDocuments.length !== 0 ? pluginDocuments.map((document) => this.pluginDocumentParser.toDomain(document)) : [];
     } catch ({message}) {
       throw new Error(message);
@@ -39,6 +40,7 @@ class MongoPluginRepository extends PluginRepository {
   async update(plugin) {
     const db = await this.mongoDbHandler.getInstance();
     try {
+      // eslint-disable-next-line max-len
       await db.collection('plugins').replaceOne({_id: MUUID.from(plugin.id)}, this.pluginDocumentParser.toDocument(plugin));
     } catch ({message}) {
       throw new Error(message);

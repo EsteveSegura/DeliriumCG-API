@@ -1,20 +1,20 @@
-const AuthUserResponse = require('./auth-user-response')
+const AuthUserResponse = require('./auth-user-response');
 
 class AuthUser {
-  constructor({ userRepository }) {
+  constructor({userRepository}) {
     this.userRepository = userRepository;
   }
 
-  async auth({ id }) {
+  async auth({id}) {
     const domain = await this.userRepository.find(id);
-    this._checkIfUserExists(domain)
+    this._checkIfUserExists(domain);
 
-    return new AuthUserResponse({id})
+    return new AuthUserResponse({id});
   }
 
   _checkIfUserExists(user) {
-    if(!user){
-      throw new Error("Owner not exists")
+    if (!user) {
+      throw new Error('Owner not exists');
     }
   }
 }

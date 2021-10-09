@@ -1,5 +1,5 @@
 class DisplayPluginCommand {
-  constructor({ id }) {
+  constructor({id}) {
     this.id = id;
   }
 }
