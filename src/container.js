@@ -3,6 +3,8 @@ const awilix = require('awilix');
 const {promisify} = require('util');
 const {v4: uuidv4} = require('uuid');
 const axios = require('axios');
+const sentry = require('@sentry/node');
+const errorPublisher = require('./infrastructure/services/error-publisher');
 const crypto = require('crypto');
 const jsonwebtoken = require('jsonwebtoken');
 const JwtGenerator = require('./infrastructure/services/jwt-generator');
@@ -36,6 +38,8 @@ container.register({
   promisify: awilix.asValue(promisify),
   uuidv4: awilix.asValue(uuidv4),
   axios: awilix.asValue(axios),
+  sentry: awilix.asValue(sentry),
+  errorPublisher: awilix.asClass(errorPublisher).singleton(),
   crypto: awilix.asValue(crypto),
   jwt: awilix.asValue(jsonwebtoken),
   TwitchClient: awilix.asClass(TwitchClient),

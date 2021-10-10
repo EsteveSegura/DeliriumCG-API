@@ -26,6 +26,9 @@ const run = {
     userCollectionName: process.env.MONGO_DB_NAME || 'users',
     timeout: 5000,
   },
+  sentry: {
+    sentryDsn: process.env.SENTRY_DSN,
+  },
 };
 
 const test = {
@@ -53,6 +56,9 @@ const test = {
     dbName: process.env.MONGO_DB_NAME || 'deliriumCG',
     userCollectionName: process.env.MONGO_DB_NAME || 'users',
     timeout: 5000,
+  },
+  sentry: {
+    sentryDsn: 'NODSN',
   },
 };
 

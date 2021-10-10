@@ -1,4 +1,5 @@
 require('dotenv').config();
+const container = require('./container');
 const {server: {port}} = require('./infrastructure/config');
 
 const express = require('express');
@@ -9,6 +10,9 @@ const cors = require('cors');
 const pluginRoutes = require('./infrastructure/rest/plugins-controller');
 const userRoutes = require('./infrastructure/rest/users-controller');
 const healthRoutes = require('./infrastructure/rest/health-controller');
+const errorPublisher = container.resolve('errorPublisher');
+
+errorPublisher.init();
 
 const overlaySsr = require('./infrastructure/ssr/overlay-ssr');
 

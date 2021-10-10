@@ -37,6 +37,8 @@
   },
   "homepage": "https://github.com/EsteveSegura/DeliriumCG-API#readme",
   "dependencies": {
+    "@sentry/node": "^6.13.3",
+    "@sentry/tracing": "^6.13.3",
     "awilix": "^5.0.1",
     "axios": "^0.22.0",
     "body-parser": "^1.19.0",

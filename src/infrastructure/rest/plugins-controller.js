@@ -6,6 +6,8 @@ const TransferPluginCommand = require('../../application/transfer_plugin/transfe
 const TriggerPulseCommand = require('../../application/get_plugin/get-plugin-command');
 const container = require('../../container');
 const verifyToken = require('./middleware/verify-token');
+const errorPublisher = container.resolve('errorPublisher');
+
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
@@ -28,8 +30,10 @@ router.post('/', verifyToken, async (req, res) => {
     const response = await savePlugin.save(command);
 
     res.status(200).json({...response});
-  } catch (error) {
-    res.status(500).json({error: error.toString()});
+  } catch (err) {
+    errorPublisher.setIdentity({id: authenticatedId});
+    errorPublisher.emitError(err);
+    res.status(500).json({error: err.toString()});
   }
 });
 
@@ -43,9 +47,11 @@ router.put('/:id/transfer', verifyToken, async (req, res) => {
     await transferPlugin.transfer(command);
 
     res.status(200).json();
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({error: error.toString()});
+  } catch (err) {
+    errorPublisher.setIdentity({id: idToTransfer});
+    errorPublisher.setPluginId({id: idPlugin});
+    errorPublisher.emitError(err);
+    res.status(500).json({error: err.toString()});
   }
 });
 
@@ -56,9 +62,10 @@ router.get('/', verifyToken, async (req, res) => {
     const response = await listPlugins.list(command);
 
     res.status(200).json({...response});
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({error: error.toString()});
+  } catch (err) {
+    errorPublisher.setIdentity({id: req.authenticatedUserId.id});
+    errorPublisher.emitError(err);
+    res.status(500).json({error: err.toString()});
   }
 });
 
@@ -72,9 +79,11 @@ router.get('/:id', verifyToken, async (req, res) => {
     const response = await getPlugin.get(command);
 
     res.status(200).json({...response});
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({error: error.toString()});
+  } catch (err) {
+    errorPublisher.setIdentity({id: authenticatedId});
+    errorPublisher.setPluginId({id});
+    errorPublisher.emitError(err);
+    res.status(500).json({error: err.toString()});
   }
 });
 
@@ -90,9 +99,12 @@ router.post('/:id/trigger/pulse', verifyToken, async (req, res) => {
     await triggerPulse.trigger(command);
 
     res.status(200).send();
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({error: error.toString()});
+  } catch (err) {
+    errorPublisher.setIdentity({id: authenticatedId});
+    errorPublisher.setPluginId({id});
+    errorPublisher.setTriggerData({type: 'pulse', name});
+    errorPublisher.emitError(err);
+    res.status(500).json({error: err.toString()});
   }
 });
 
